@@ -22,14 +22,13 @@ public class MyMiniSearchEngine {
         indexes = new HashMap<>();
         for(int doc = 0; doc < texts.size(); doc++) {
             String[] tokens = texts.get(doc).split(" ");
-
             for(int wordKey = 0; wordKey < tokens.length; wordKey++) {
                 List<List<Integer>> currentWordLocations = new ArrayList<>();
                 for(int i = 0; i < texts.size(); i++) {
                     currentWordLocations.add(new ArrayList<>());
                 }
                 if(!indexes.containsKey(tokens[wordKey])){
-                    indexes.put(tokens[wordKey], currentWordLocations);
+                    indexes.put(tokens[wordKey].toLowerCase(), currentWordLocations);
                 }
                 indexes.get(tokens[wordKey]).get(doc).add(wordKey);
             }
