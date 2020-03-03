@@ -45,7 +45,15 @@ public class MyMiniSearchEngine {
             if (indexes.get(keyPhrase).get(i).size() > 0)
             locations.add(i);
         }
-        //indexes.get(keyPhrase);
+        String[] splitPhrase = keyPhrase.split(" ");
+        for(int j = 0; j < splitPhrase.length; j++) {
+            if(locations.get(j) == ) {
+                for (int doc = 0; doc < splitPhrase.length; doc++) {
+                    locations.set(doc, locations.get(doc) - doc);
+                }
+            }
+        }
+
 
         return locations;
     }
