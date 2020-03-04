@@ -60,9 +60,9 @@ public class MyMiniSearchEngineTest {
         MyMiniSearchEngine engine = new MyMiniSearchEngine(documents());
 
         String[] inputs = {
-                "sunday hello world fun";
-                "Sunday hello world fun";
-        }
+                "sunday hello world fun",
+                "Sunday hello world fun",
+        };
 
         for (String input : inputs) {
             List<Integer> result = engine.search(input);
@@ -77,7 +77,7 @@ public class MyMiniSearchEngineTest {
         MyMiniSearchEngine engine = new MyMiniSearchEngine(documents());
         List<Integer> result = engine.search("computer");
 
-        assertEquals(0, result.size());
+        assertEquals(1, result.size());
 
         assertEquals(Integer.valueOf(-1), result.get(0));
     }
