@@ -40,35 +40,38 @@ public class MyMiniSearchEngine {
     // return an empty list if search() finds no match in all documents.
     public List<Integer> search(String keyPhrase) {
         // homework
-        String[] splitPhrase = keyPhrase.split(" ");
+        String[] splitPhrase = keyPhrase.toLowerCase().split(" ");
         List<Integer> locations = new ArrayList<>();
 
         for(int i = 0; i < splitPhrase.length-1; i++) {
             if(indexes.containsKey(splitPhrase[i]) && indexes.containsKey(splitPhrase[i+1])) {
                 for(int j = 0; j < indexes.get(splitPhrase[i]).size(); j++) {
-                    if(indexes.get(splitPhrase[i]).size() > 0 && indexes.get(splitPhrase[i+1]).size() > 0) {
+                    if(indexes.get(splitPhrase[i]).get(j).size() > 0 && indexes.get(splitPhrase[i+1]).get(j).size() > 0) {
                         for(int k = 0; k < indexes.get(splitPhrase[i]).get(j).size(); k++) {
-                            if(indexes.get(splitPhrase[i]).get(j).get(k)+1 == indexes.get(splitPhrase[i]).get(j).get(k)) {
-                                locations.add(j);
+                            if(indexes.get(splitPhrase[i]).get(j).get(k)+1 == indexes.get(splitPhrase[i+1]).get(j).get(k)) {
+                                if(!locations.contains(j)) {
+                                    locations.add(j);
+                                }
                             }
                         }
                     }
                 }
             } else {
                 locations.add(-1);
+                break;
             }
         }
-
-        //for(int i = 0; i < indexes.get(keyPhrase).size(); i++) {
-            //if (indexes.get(keyPhrase).get(i).size() > 0)
-                //locations.add(i);
-        //}
-        //for(int j = 0; j < splitPhrase.length; j++) {
-            //if(locations.get(j) == ) {
-                //for (int doc = 0; doc < splitPhrase.length; doc++) {
-                    //locations.set(doc, locations.get(doc) - doc);
-                //}
-            //}
+        if(splitPhrase.length == 1) {
+            if (indexes.containsKey(splitPhrase[0])) {
+                for (int doc = 0; doc < indexes.get(splitPhrase[0]).size(); doc++) {
+                    if (indexes.get(splitPhrase[0]).get(doc).size() > 0) {
+                        locations.add(doc);
+                    }
+                }
+            } else {
+                locations.add(-1);
+            }
+        }
 
         return locations;
     }
